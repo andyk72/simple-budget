@@ -1,0 +1,7 @@
+{
+  "name": "simple-budget",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
