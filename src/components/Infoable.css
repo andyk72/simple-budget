@@ -1,0 +1,160 @@
+/* ======================================================= Infoable customizable CSS */
+
+:root {
+    --infoable-color: black;
+    --infoable-bg-color: white;
+    --infoable-info-min-width: 200px;
+    --infoable-info-padding: 15px;
+    --infoable-info-border-radius: 10px;
+    --infoable-icon-size: 20px;
+    --infoable-arrow-size: 10px;
+  }
+  
+  /* ======================================================= Infoable elements */
+  
+  .sb-infoable {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .sb-infoable-content {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .sb-infoable-icon {
+    width: var(--infoable-icon-size);
+    height: var(--infoable-icon-size);
+    text-align: center;
+    color: var(--infoable-color);
+    background-color: var(--infoable-bg-color);
+    border-radius: calc(var(--infoable-icon-size) / 2);
+    line-height: var(--infoable-icon-size);
+  }
+  
+  .sb-infoable-info {
+    display: inline-block;
+    position: absolute;
+    min-width: var(--infoable-info-min-width);
+    padding: var(--infoable-info-padding);
+    color: var(--infoable-color);
+    background-color: var(--infoable-bg-color);
+    border-radius: var(--infoable-info-border-radius);
+  }
+  
+  .sb-infoable-info-arrow {
+    position: absolute;
+  }
+  
+  /* ======================================================= Infoable icon positioning */
+  
+  /* icon top left */
+  
+  .sb-infoable--icon-topleft .sb-infoable-content {
+    top: calc(0px - var(--infoable-icon-size));
+    left: calc(0px - var(--infoable-icon-size));
+  }
+  
+  /* icon top right */
+  
+  .sb-infoable--icon-topright .sb-infoable-content {
+    top: calc(0px - var(--infoable-icon-size));
+    right: calc(0px - var(--infoable-icon-size));
+  }
+  
+  /* icon bottom left */
+  
+  .sb-infoable--icon-bottomleft .sb-infoable-content {
+    bottom: calc(0px - var(--infoable-icon-size));
+    left: calc(0px - var(--infoable-icon-size));
+  }
+  
+  /* icon bottom right */
+  
+  .sb-infoable--icon-bottomright .sb-infoable-content {
+    bottom: calc(0px - var(--infoable-icon-size));
+    right: calc(0px - var(--infoable-icon-size));
+  }
+  
+  /* ======================================================= Infoable info positioning */
+  
+  /* info screen centered */
+  
+  .sb-infoable--info-center .sb-infoable-info {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  /* info top */
+  
+  .sb-infoable--info-top .sb-infoable-info {
+    top: calc(0px - var(--infoable-arrow-size));
+    transform: translateY(-100%);
+  }
+  
+  .sb-infoable--info-top .sb-infoable-info-arrow {
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-top: var(--infoable-arrow-size) solid var(--infoable-bg-color);
+    border-left: var(--infoable-arrow-size) solid transparent;
+    border-right: var(--infoable-arrow-size) solid transparent;
+  }
+  
+  /* info right */
+  
+  .sb-infoable--info-right .sb-infoable-info {
+    left: calc(100% + var(--infoable-arrow-size));
+  }
+  
+  .sb-infoable--info-right .sb-infoable-info-arrow {
+    top: 50%;
+    transform: translateY(-50%);
+    left: calc(0px - var(--infoable-arrow-size));
+    width: 0;
+    height: 0;
+    border-right: var(--infoable-arrow-size) solid var(--infoable-bg-color);
+    border-top: var(--infoable-arrow-size) solid transparent;
+    border-bottom: var(--infoable-arrow-size) solid transparent;
+  }
+  
+  /* info bottom */
+  
+  .sb-infoable--info-bottom .sb-infoable-info {
+    top: calc(var(--infoable-icon-size) + var(--infoable-arrow-size));
+  }
+  
+  .sb-infoable--info-bottom .sb-infoable-info-arrow {
+    top: calc(0px - var(--infoable-arrow-size)); /*-10px;*/
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-bottom: var(--infoable-arrow-size) solid var(--infoable-bg-color);
+    border-left: var(--infoable-arrow-size) solid transparent;
+    border-right: var(--infoable-arrow-size) solid transparent;
+  }
+  
+  /* info left */
+  
+  .sb-infoable--info-left .sb-infoable-info {
+    right: calc(var(--infoable-icon-size) + var(--infoable-arrow-size));
+  }
+  
+  .sb-infoable--info-left .sb-infoable-info-arrow {
+    top: 50%;
+    transform: translateY(-50%);
+    right: calc(0px - var(--infoable-arrow-size));
+    width: 0;
+    height: 0;
+    border-left: var(--infoable-arrow-size) solid var(--infoable-bg-color);
+    border-top: var(--infoable-arrow-size) solid transparent;
+    border-bottom: var(--infoable-arrow-size) solid transparent;
+  }
+  

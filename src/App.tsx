@@ -1,5 +1,7 @@
 import React from 'react';
+
 import { Redirect, Route } from 'react-router-dom';
+
 import {
   IonApp,
   IonIcon,
@@ -10,10 +12,15 @@ import {
   IonTabs
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import { ellipse, square, triangle } from 'ionicons/icons';
-import Tab1 from './pages/Tab1';
-import Tab2 from './pages/Tab2';
-import Tab3 from './pages/Tab3';
+import { ellipse, square, wallet, logoEuro } from 'ionicons/icons';
+
+import Balance from './pages/Balance';
+import DailyBudget from './pages/DailyBudget';
+import NextIncome from './pages/NextIncome';
+
+import { data } from './mock-data/mock-data';
+import { getBalance } from './mock-data/mock-data';
+import { getDailyBudget, getNextIncome } from './helpers/budget-helper';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -33,31 +40,51 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
+import './theme/simple-budget.css';
+
+import './App.css';
 
 const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
       <IonTabs>
+          
         <IonRouterOutlet>
-          <Route path="/tab1" component={Tab1} exact={true} />
-          <Route path="/tab2" component={Tab2} exact={true} />
-          <Route path="/tab3" component={Tab3} />
-          <Route path="/" render={() => <Redirect to="/tab1" />} exact={true} />
+          <Route
+            path="/balance"
+            render={ () =>
+                <Balance balance={ getBalance() } />
+            } />
+          <Route
+            path="/dailyBudget"
+            render={ () =>
+                <DailyBudget dailyBudget={ getDailyBudget(data.balance, data.incomes, new Date()) } />
+            } />
+          <Route
+            path="/nextIncome"
+            render={ () =>
+                <NextIncome nextIncome={ getNextIncome(data.incomes, new Date()) } />
+            } />
+          <Route
+            path="/"
+            render={() => <Redirect to="/balance" />} exact />
         </IonRouterOutlet>
+
         <IonTabBar slot="bottom">
-          <IonTabButton tab="tab1" href="/tab1">
-            <IonIcon icon={triangle} />
-            <IonLabel>Tab 1</IonLabel>
+          <IonTabButton tab="balance" href="/balance">
+            <IonIcon icon={logoEuro} />
+            <IonLabel>Balance</IonLabel>
           </IonTabButton>
-          <IonTabButton tab="tab2" href="/tab2">
+          <IonTabButton tab="dailyBudget" href="/dailyBudget">
+            <IonIcon icon={wallet} />
+            <IonLabel>Daily Budget</IonLabel>
+          </IonTabButton>
+          <IonTabButton tab="nextIncome" href="/nextIncome">
             <IonIcon icon={ellipse} />
-            <IonLabel>Tab 2</IonLabel>
-          </IonTabButton>
-          <IonTabButton tab="tab3" href="/tab3">
-            <IonIcon icon={square} />
-            <IonLabel>Tab 3</IonLabel>
+            <IonLabel>Next Income</IonLabel>
           </IonTabButton>
         </IonTabBar>
+
       </IonTabs>
     </IonReactRouter>
   </IonApp>
