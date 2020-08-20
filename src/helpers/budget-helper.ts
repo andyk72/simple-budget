@@ -72,15 +72,24 @@ export const getNextIncome = (incomes: IIncome[], atDate: Date): IIncomeWithDays
  * @param atDate {Date}
  */
 export const getDailyBudget = (balance: number, incomes: IIncome[], atDate: Date): number => {
+
+    // validate arguments values
+    if (balance <= 0 || incomes.length === 0) {
+        return 0;
+    }
+
     // get next income relative to atDate
-    const nextIncome:IIncomeWithDaysDiff = getNextIncome(incomes, atDate);
+    const nextIncome: IIncomeWithDaysDiff = getNextIncome(incomes, atDate);
+
     // get days diff
     const daysToNextIncome: number = nextIncome.daysDiff;
     if (daysToNextIncome === -1) {
         throw('budget-helper::getDailyBudget Error => Invalid daysDiff number: cannot calculate daily budget')
     }
+
     // return 
     return balance/daysToNextIncome;
+
 };
 
 const _getIncomeData = (income: IIncome, atDate: Date): IIncomeWithDaysDiff  => {

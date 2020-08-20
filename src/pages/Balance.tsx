@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
+import * as budgetActions from '../redux/actions/budgetActions';
 
 import PageTemplate from '../components/templates/PageTemplate';
 import Infoable from '../components/Infoable';
@@ -9,12 +11,29 @@ import { getAmountCssClass } from '../helpers/component-gui-helper';
 import './Balance.css';
 
 interface IProps {
-    balance: number
+    balance: number,
+    budgetLoad: () => void
 }
+
+const mapState = (state: any) => {
+    return {
+        balance: state.budget.balance
+    }
+};
+
+const mapDispatch = (dispatch: any) => {
+    return {
+        budgetLoad: () => dispatch(budgetActions.budgetLoad())
+    };
+};
 
 const Balance: React.FC<IProps> = (props: IProps) => {
 
     const balance: number = props.balance;
+
+    useEffect(() => {
+        props.budgetLoad();
+    }, []);
 
     return (
         <PageTemplate title="Balance">
@@ -25,4 +44,7 @@ const Balance: React.FC<IProps> = (props: IProps) => {
     
 };
 
-export default Balance;
+export default connect(mapState, mapDispatch)(Balance);
+export {
+    Balance
+}

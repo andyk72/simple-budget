@@ -1,38 +1,40 @@
-import * as incomesResource from './incomes';
+import * as incomesResource from './rxjs-incomes';
 
 describe('/incomes resource', () => {
 
     it('GET method fetches the incomes list in the correct format', (done) => {
-        incomesResource.get({
-            next: incomes => {
-                console.log('Incomes Get Response ', incomes);
-                const income = incomes[0];
-                expect(incomes.length).toBeDefined();
-                expect(income).toHaveProperty('id');
-                expect(income).toHaveProperty('date');
-                expect(income).toHaveProperty('amount');
-            },
-            error: err => {
-                console.error(err);
-                done();
-            },
-            complete: () => {
-                console.log('Incomes Get Complete.');
-                done();
-            },
-        });
+        incomesResource
+            .get()
+            .subscribe({
+                next: incomes => {
+                    console.log('Incomes Get Response ', incomes);
+                    const income = incomes[0];
+                    expect(incomes.length).toBeDefined();
+                    expect(income).toHaveProperty('id');
+                    expect(income).toHaveProperty('date');
+                    expect(income).toHaveProperty('amount');
+                },
+                error: err => {
+                    console.error(err);
+                    done();
+                },
+                complete: () => {
+                    console.log('Incomes Get Complete.');
+                    done();
+                },
+            });
     });
 
     it('POST method creates a new income', (done) => {
-        incomesResource.post(
-            {
+        incomesResource
+            .post({
                 resource: {
                     id: 'nik',
                     date: { day: 1 },
                     amount: 200
                 }
-            },
-            {
+            })
+            .subscribe({
                 /**
                  * @param {Object} ajaxResponse
                  *  .status {Number}
@@ -56,16 +58,15 @@ describe('/incomes resource', () => {
                     console.log('Incomes Get Complete.');
                     done();
                 },
-            }
-        );
+            });
     });
 
     it('DELETE method deletes the defined income', (done) => {
-        incomesResource.del(
-            {
+        incomesResource
+            .del({
                 resourceId: 'nik'
-            },
-            {
+            })
+            .subscribe({
                 next: ajaxResponse => {
                     console.log('Income Delete response ', ajaxResponse.response);
                     if (ajaxResponse.status === 200) {
@@ -82,8 +83,7 @@ describe('/incomes resource', () => {
                     console.log('Income Delete Complete.');
                     done();
                 },
-            }
-        );
+            });
     });
 
 });

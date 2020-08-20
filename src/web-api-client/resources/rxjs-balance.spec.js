@@ -1,31 +1,31 @@
-import * as balanceResource from './balance';
+import * as balanceResource from './rxjs-balance';
 
 describe('/balance resource', () => {
 
     it('GET method fetches the balance value', (done) => {
-        balanceResource.get({
-            next: balance => {
-                console.log('Balance Get Response ', balance);
-                expect(balance).toHaveProperty('value');
-                expect(typeof(balance.value)).toEqual('number');
-            },
-            error: err => {
-                console.error(err);
-                done();
-            },
-            complete: () => {
-                console.log('Balance Get Complete.');
-                done();
-            },
-        });
+        balanceResource.get()
+            .subscribe({
+                next: balance => {
+                    console.log('Balance Get Response ', balance);
+                    expect(balance).toHaveProperty('value');
+                    expect(typeof(balance.value)).toEqual('number');
+                },
+                error: err => {
+                    console.error(err);
+                    done();
+                },
+                complete: () => {
+                    console.log('Balance Get Complete.');
+                    done();
+                },
+            });
     });
 
     it('PUT method updates the balance value', (done) => {
-        balanceResource.put(
-            {
-                resource: {value: 1200}
-            },
-            {
+        balanceResource.put({
+            resource: {value: 1200}
+        })
+            .subscribe({
                 /**
                  * @param {Object} ajaxResponse
                  *  .status {Number}
@@ -45,8 +45,7 @@ describe('/balance resource', () => {
                     console.log('Balance Put Complete.');
                     done();
                 },
-            }
-        );
+            });
     });
 
 });

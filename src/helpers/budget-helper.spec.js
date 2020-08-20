@@ -36,6 +36,13 @@ describe('budget-helper module', () => {
         expect(dailyBudget).toEqual(expected);
     });
 
-    
+    it('getDailyBudget() returns 0 if balance === 0 or incomes === []', () => {
+        const balance = 0;
+        const incomes = [];
+        const atDate = new Date('2020-07-27');
+        const dailyBudget = getDailyBudget(balance, incomes, atDate);
+        const expected = 0;
+        expect(dailyBudget).toEqual(expected);
+    });    
 
 });

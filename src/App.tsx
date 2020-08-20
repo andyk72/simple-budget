@@ -18,10 +18,6 @@ import Balance from './pages/Balance';
 import DailyBudget from './pages/DailyBudget';
 import NextIncome from './pages/NextIncome';
 
-import { data } from './mock-data/mock-data';
-import { getBalance } from './mock-data/mock-data';
-import { getDailyBudget, getNextIncome } from './helpers/budget-helper';
-
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
 
@@ -53,17 +49,17 @@ const App: React.FC = () => (
           <Route
             path="/balance"
             render={ () =>
-                <Balance balance={ getBalance() } />
+                <Balance />
             } />
           <Route
             path="/dailyBudget"
             render={ () =>
-                <DailyBudget dailyBudget={ getDailyBudget(data.balance, data.incomes, new Date()) } />
+                <DailyBudget />
             } />
           <Route
             path="/nextIncome"
             render={ () =>
-                <NextIncome nextIncome={ getNextIncome(data.incomes, new Date()) } />
+                <NextIncome />
             } />
           <Route
             path="/"
