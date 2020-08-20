@@ -33,7 +33,7 @@
   "scripts": {
     "start:all": "run-p start:server ionic",
     "ionic": "ionic serve",
-    "start:server": "json-server --watch db.json",
+    "start:server": "cd ../simple-budget-web-api-server && npm start",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
