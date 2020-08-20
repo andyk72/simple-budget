@@ -12,9 +12,10 @@
  * 
  */
 
+import config from '../../config/config';
 import * as request from '../rxjs-request';
 
-const BASE_API_URL = 'http://localhost:3000';
+const BASE_API_URL = config.webApiServer.baseUrl;
 const BASE_PATH = '/balance';
 const DEFAULT_HEADERS = {
     'Content-Type': 'application/json',
