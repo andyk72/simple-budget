@@ -27,11 +27,12 @@
   .sb-infoable-icon {
     width: var(--infoable-icon-size);
     height: var(--infoable-icon-size);
+    line-height: var(--infoable-icon-size);
     text-align: center;
     color: var(--infoable-color);
     background-color: var(--infoable-bg-color);
     border-radius: calc(var(--infoable-icon-size) / 2);
-    line-height: var(--infoable-icon-size);
+    border: 1px solid var(--ion-color-primary);
   }
   
   .sb-infoable-info {
@@ -42,6 +43,7 @@
     color: var(--infoable-color);
     background-color: var(--infoable-bg-color);
     border-radius: var(--infoable-info-border-radius);
+    border: 1px solid var(--ion-color-primary);
   }
   
   .sb-infoable-info-arrow {
