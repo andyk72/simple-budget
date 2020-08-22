@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
+import * as guiActions from '../redux/actions/guiActions';
 import * as budgetActions from '../redux/actions/budgetActions';
 
 import PageTemplate from '../components/templates/PageTemplate';
@@ -26,7 +27,10 @@ const mapState = (state: any) => {
 
 const mapDispatch = (dispatch: any) => {
     return {
-        budgetLoad: () => dispatch(budgetActions.budgetLoad())
+        budgetLoad: () => {
+            dispatch(guiActions.guiLoadStart());
+            dispatch(budgetActions.budgetLoad());
+        }
     };
 };
 

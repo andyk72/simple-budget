@@ -1,5 +1,7 @@
 import * as types from './actionsTypes';
 
+import * as guiActions from './guiActions';
+
 import { parallel } from '../../web-api-client/rxjs-request';
 import * as incomesResource from '../../web-api-client/resources/rxjs-incomes';
 import * as balanceResource from '../../web-api-client/resources/rxjs-balance';
@@ -14,12 +16,6 @@ export function budgetLoad() {
 
     const errorHandler = (dispatch, error) => {
         dispatch(budgetLoadFail(error));
-        /*
-        dispatch(guiToastShow({
-            mode: 'error',
-            message: error
-        }));
-        */
     };
 
     return function(dispatch) {
@@ -37,55 +33,14 @@ export function budgetLoad() {
             error: err => {
                 console.error(err);
                 errorHandler(dispatch, err);
+            },
+            complete: () => {
+                dispatch(guiActions.guiLoadEnd())
             }
         });
     }
     
 }
-
-/**
-export function budgetLoad() {
-
-    const errorHandler = (dispatch, error) => {
-        dispatch(budgetLoadFail(error));
-    };
-
-    // [TODO] -> this must be a 2 parallel requests (balance, incomes)
-    return function(dispatch) {
-        balanceResource
-            .get()
-            .subscribe({
-                next: balance => {
-                    console.log('Balance Get Response ', balance);
-                    dispatch(budgetLoadSuccess({
-                        balance,
-                        incomes:[]
-                    }));
-                },
-                error: err => {
-                    console.error(err);
-                    errorHandler(dispatch, err);
-                }
-            });
-        incomesResource
-            .get()
-            .subscribe({
-                next: incomes => {
-                    console.log('Incomes Get Response ', incomes);
-                    dispatch(budgetLoadSuccess({
-                        incomes,
-                        balance: 10000 // [TODO] -> balanceResource.get 
-                    }));
-                },
-                error: err => {
-                    console.error(err);
-                    errorHandler(dispatch, err);
-                }
-            });
-    }
-    
-}
- */
 
 /**
  * 
