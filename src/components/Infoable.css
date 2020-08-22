@@ -1,8 +1,8 @@
 /* ======================================================= Infoable customizable CSS */
 
 :root {
-    --infoable-color: black;
-    --infoable-bg-color: white;
+    --infoable-color: white;
+    --infoable-bg-color: var(--ion-color-primary);
     --infoable-info-min-width: 200px;
     --infoable-info-padding: 15px;
     --infoable-info-border-radius: 10px;
@@ -32,7 +32,10 @@
     color: var(--infoable-color);
     background-color: var(--infoable-bg-color);
     border-radius: calc(var(--infoable-icon-size) / 2);
-    border: 1px solid var(--ion-color-primary);
+  }
+
+  .sb-infoable-icon:hover {
+      cursor: pointer;
   }
   
   .sb-infoable-info {
@@ -43,7 +46,6 @@
     color: var(--infoable-color);
     background-color: var(--infoable-bg-color);
     border-radius: var(--infoable-info-border-radius);
-    border: 1px solid var(--ion-color-primary);
   }
   
   .sb-infoable-info-arrow {
