@@ -50,3 +50,7 @@
     border-bottom: var(--sb-arrow-size) solid transparent; 
     border-right: var(--sb-arrow-size) solid blue; 
 }
+
+#tab-button-login {
+    display: none;
+}

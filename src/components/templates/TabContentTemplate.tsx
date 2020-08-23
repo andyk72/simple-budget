@@ -3,7 +3,7 @@ import './TabContentTemplate.css';
 
 const TabContentTemplate: React.FC = (props: any) => {
   return (
-    <div className="container">
+    <div className="sb-content-container">
       { props.children }
     </div>
   );

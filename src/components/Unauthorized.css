@@ -1,0 +1,14 @@
+#sb-unauthorized {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sb-unauthorized-icon {
+    color: var(--ion-color-danger);
+}
+
+.sb-unauthorized-message {
+    margin-top: 2%;
+    color: var(--ion-color-danger);
+}

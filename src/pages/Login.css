@@ -1,0 +1,15 @@
+#sb-form-login {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+}
+
+.sb-form-login-item {
+    margin-bottom: 2%;
+}
+
+@media screen and (min-width: 768px) {
+    #sb-form-login {
+        width: 50%;
+    }
+}

@@ -1,22 +1,24 @@
 import React from 'react';
-
 import { Redirect, Route } from 'react-router-dom';
+
+import { connect } from 'react-redux';
 
 import {
   IonApp,
-  IonIcon,
-  IonLabel,
   IonRouterOutlet,
   IonTabBar,
-  IonTabButton,
   IonTabs
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import { ellipse, square, wallet, logoEuro } from 'ionicons/icons';
 
+import Login from './pages/Login';
 import Balance from './pages/Balance';
 import DailyBudget from './pages/DailyBudget';
 import NextIncome from './pages/NextIncome';
+
+import IUser from './interfaces/IUser';
+
+import { publicTabsRender, privateTabsRender } from './helpers/navigation-helper';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -40,50 +42,56 @@ import './theme/simple-budget.css';
 
 import './App.css';
 
-const App: React.FC = () => (
-  <IonApp>
-    <IonReactRouter>
-      <IonTabs>
-          
-        <IonRouterOutlet>
-          <Route
-            path="/balance"
-            render={ () =>
-                <Balance />
-            } />
-          <Route
-            path="/dailyBudget"
-            render={ () =>
-                <DailyBudget />
-            } />
-          <Route
-            path="/nextIncome"
-            render={ () =>
-                <NextIncome />
-            } />
-          <Route
-            path="/"
-            render={() => <Redirect to="/balance" />} exact />
-        </IonRouterOutlet>
+const mapState = (state: any) => ({user: state.user});
 
-        <IonTabBar slot="bottom">
-          <IonTabButton tab="balance" href="/balance">
-            <IonIcon icon={logoEuro} />
-            <IonLabel>Balance</IonLabel>
-          </IonTabButton>
-          <IonTabButton tab="dailyBudget" href="/dailyBudget">
-            <IonIcon icon={wallet} />
-            <IonLabel>Daily Budget</IonLabel>
-          </IonTabButton>
-          <IonTabButton tab="nextIncome" href="/nextIncome">
-            <IonIcon icon={ellipse} />
-            <IonLabel>Next Income</IonLabel>
-          </IonTabButton>
-        </IonTabBar>
+interface IProps {
+    user: IUser
+}
 
-      </IonTabs>
-    </IonReactRouter>
-  </IonApp>
-);
+const App: React.FC<IProps> = (props: IProps) => {
 
-export default App;
+  return (
+
+    <IonApp>
+      <IonReactRouter>
+        <IonTabs>
+            
+          <IonRouterOutlet>
+            <Route
+                path="/balance"
+                render={ () =>
+                    <Balance />
+                } exact />
+            <Route
+                path="/dailyBudget"
+                render={ () =>
+                    <DailyBudget />
+                } />
+            <Route
+                path="/nextIncome"
+                render={ () =>
+                    <NextIncome />
+                } />
+            <Route
+                path="/login"
+                render={ () =>
+                    <Login />
+                } />
+            <Route
+                path="/"
+                render={() => <Redirect to={props.user.isAuthenticated ? "/balance" : "/login"} />} exact />
+          </IonRouterOutlet>
+
+          <IonTabBar slot="bottom">
+            { !props.user.isAuthenticated && publicTabsRender() }
+            { props.user.isAuthenticated && privateTabsRender() }
+          </IonTabBar>
+
+        </IonTabs>
+      </IonReactRouter>
+    </IonApp>
+
+  );
+};
+
+export default connect(mapState)(App);

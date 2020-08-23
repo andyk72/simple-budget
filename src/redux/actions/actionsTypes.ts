@@ -1,6 +1,11 @@
 export const GUI_LOAD_START = 'GUI_LOAD_START';
 export const GUI_LOAD_END = 'GUI_LOAD_END';
 
+export const USER_LOGIN = 'USER_LOGIN';
+export const USER_LOGIN_SUCCESS = 'USER_LOGIN_SUCCESS';
+export const USER_LOGIN_DENIED = 'USER_LOGIN_DENIED';
+export const USER_LOGIN_FAIL = 'USER_LOGIN_FAIL';
+
 export const BUDGET_LOAD = 'BUDGET_LOAD';
 export const BUDGET_LOAD_SUCCESS = 'BUDGET_LOAD_SUCCESS';
 export const BUDGET_LOAD_FAIL = 'BUDGET_LOAD_FAIL';

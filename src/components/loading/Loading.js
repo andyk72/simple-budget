@@ -13,11 +13,11 @@
  *          'top-right'|'middle-right'|'bottom-left'
  *      ]
  *  .style {Object}
- *      .container {Object}
+ *      .container? {Object}
  *          .background {String}
- *      .body {Object}
+ *      .body? {Object}
  *          .flexDirection {String}
- *      .label {Object}
+ *      .label? {Object}
  *          .color
  * @usage
  *  <Loading layout="top-right" />
